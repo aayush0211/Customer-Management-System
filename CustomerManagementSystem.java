@@ -1,5 +1,6 @@
 package customerManagementSystem.test;
 
+import java.util.ArrayList;
 import java.util.Collections;
 //import java.time.LocalDate;
 //import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.Scanner;
 
 import core.utils.CustomSort;
 import core.utils.CustomSortDesc;
+import customerData.CustomerDataBinaryFile;
 
 import static customerManagementSystem.core.CustomerValidationRules.*;
 import customerManagementSystem.core.*;
@@ -20,14 +22,17 @@ public class CustomerManagementSystem {
 		// TODO Auto-generated method stub
 		try(Scanner sc = new Scanner(System.in)){
 			//List<Customer> customers = new ArrayList<>();
-			List<Customer> customers = populateCustomer();
+			List<Customer> customers = new ArrayList<>(); //populateCustomer();
+			System.out.println("Enter File Name");
+			customers = CustomerDataBinaryFile.reStoreCustomerDetail(customers, "CustomerData.ser");
 			boolean exit = false;
 			while(!exit) {
 				System.out.println("Enter Choice: \n1)Sign Up(Regsiter Account)\n2)Sign in(Login to Account) \n3)Change Password \n "
 						+ "4)Un-Subscribe Customers\n5)Display all Customers\n6)sorting according email\n "
 						+ "7) sorting according Subscription amount\n 8)Remove customers according to plan\n "
 						+ "9)Sorting a/c to Desc Plan Amount\n  10)Reverse ORDER A/C TO PLAN using ListIterator \n11)Display customer not paid Subs from last 3 month \n"
-						+ "12) Remove Customer not paid subscription from past 6 month \n 0)Exit");
+						+ "12) Remove Customer not paid subscription from past 6 month \n"
+						+ "13) Store Data in a Binary File 0)Exit");
 				try {
 				switch(sc.nextInt()) {
 				case 1:
@@ -91,6 +96,9 @@ public class CustomerManagementSystem {
 					for(Customer c: customers)
 						System.out.println(c);
 					break;
+				case 13:
+					CustomerDataBinaryFile.storeCustomerDetail(customers, "CustomerData.ser");
+					System.out.println("Succesfully Stored");
 				case 0:
 					System.out.println("Thank You! ");
 					sc.close();
