@@ -1,8 +1,13 @@
 package customerManagementSystem.core;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Customer implements Comparable<Customer>{
+public class Customer implements Comparable<Customer>, Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static int idGenerator;
 	static {
 		idGenerator = 1;
